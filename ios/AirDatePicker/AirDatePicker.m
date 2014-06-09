@@ -81,7 +81,7 @@ static NSDate *maximumDate = nil;
     [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     
     CGRect datePickerFrame = self.datePicker.frame;
-    datePickerFrame.origin.y = rootView.bounds.size.height - datePickerFrame.size.height;
+    datePickerFrame.origin.y = (rootView.bounds.size.height - datePickerFrame.size.height)/2;
     self.datePicker.frame = datePickerFrame;
     
     [rootView addSubview:self.datePicker];
@@ -228,10 +228,12 @@ DEFINE_ANE_FUNCTION(AirDatePickerDisplayDatePicker)
         UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         anchor = CGRectMake(rootViewController.view.bounds.size.width - 100, 0, 100, 1); // Default anchor: Top right corner
     }
-    
+    NSLog(@"[AirDatePicker] UI_USER_INTERFACE_IDIOM = UIUserInterfaceIdiomPad %d ,or, %d",UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad,UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+
     // show date picker for iPad/iPhone
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
+    
         [[AirDatePicker sharedInstance] showDatePickerPad:date anchor:anchor];
     }
     else
